@@ -27,13 +27,10 @@ jobs:
     - name: 'Create snowsql config'
       shell: bash
       run: |
-        cp tmp_config.toml config.toml
-        echo "password =${{ secrets.SNOWCLI_PW }}" >> config.toml
-        cat config.toml
+        cp tmp_config.toml ~/.snowflake/config.toml
+        echo "password =${{ secrets.SNOWCLI_PW }}" >> ~/.snowflake/config.toml
 
     - name: 'Deploy the streamlit app'
       shell: bash
       run: |
-        snow connection list >> test
-        cat test
-        snow streamlit deploy --connection default
+        snow streamlit deploy
