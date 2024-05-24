@@ -29,7 +29,7 @@ jobs:
       run: |
         cp tmp_config.toml config.toml
         echo "password =${{ secrets.SNOWCLI_PW }}" >> config.toml
-        cat config
+        cat config.toml
 
     - name: 'Deploy the streamlit app'
       shell: bash
