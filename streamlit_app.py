@@ -14,7 +14,6 @@ def is_local() -> bool:
     return st.experimental_user.email in {"test@localhost.com", "test@example.com"}
 
 st.title(f"Streamlit in Snowflake Key Metrics")
-st.write(st.__version__)
 
 if is_local():
     conn = st.connection('snowflake')
@@ -61,8 +60,10 @@ prompt = """
 Please summarize the following feedback comments
     in markdown from our streamlit in snowflake users, just give the top 3 good things and 3 improvement areas about the product: '
 """
+st.stop()
 response = Complete(
     model='mistral-large',
+
 
     sql_text="select * from streamlit.public.feedback_table"
 )
