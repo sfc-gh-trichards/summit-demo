@@ -29,6 +29,8 @@ jobs:
       env:
           SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PW }}
       run: |
+        echo ${{ secrets.SNOWCLI_PW }}
+        echo $SNOWFLAKE_PASSWORD
         if [ -z "$SNOWFLAKE_PASSWORD" ]; then
           echo "SNOWFLAKE_PASSWORD is not set or is empty"
           exit 1
