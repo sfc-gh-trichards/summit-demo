@@ -34,4 +34,5 @@ jobs:
     - name: 'Deploy the streamlit app'
       shell: bash
       run: |
-        snow streamlit deploy
+        snow connection list
+        snow streamlit deploy --connection default
