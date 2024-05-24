@@ -27,10 +27,10 @@ jobs:
     - name: 'Check SNOWFLAKE_PASSWORD'
       shell: bash
       env:
-          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PW }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWCLI_PW }}
       run: |
         echo ${{ secrets.SNOWCLI_PW }}
-        echo $SNOWFLAKE_PASSWORD
+        echo $SNOWCLI_PW
         if [ -z "$SNOWFLAKE_PASSWORD" ]; then
           echo "SNOWFLAKE_PASSWORD is not set or is empty"
           exit 1
@@ -41,7 +41,7 @@ jobs:
     - name: 'Create snowsql config'
       shell: bash
       env:
-          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PW }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWCLI_PW }}
       run: |
         mkdir -p ~/.snowflake
         cp tmp_config.toml ~/.snowflake/config.toml
