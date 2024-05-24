@@ -26,9 +26,13 @@ jobs:
 
     - name: 'Create snowsql config'
       shell: bash
+      env:
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PW }}
       run: |
-        cp tmp_config.toml config
-        echo "password =${{ secrets.SNOWCLI_PW }}" >> config
+        mkdir -p ~/.snowflake
+        cp tmp_config.toml ~/.snowflake/config.toml
+        echo 'password = "$SNOWFLAKE_PASSWORD"' >> ~/.snowflake/config.toml
+        chmod 0600 ~/.snowflake/config.toml
 
     - name: 'Deploy the streamlit app'
       shell: bash
