@@ -27,8 +27,7 @@ jobs:
     - name: 'Create snowsql config'
       shell: bash
       run: |
-        cd sis_metrics
-        cp config.toml config
+        cp tmp_config.toml config
         echo "password =${{ secrets.SNOWCLI_PW }}" >> config
 
     - name: 'Deploy the streamlit app'

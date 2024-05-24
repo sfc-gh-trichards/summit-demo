@@ -1,0 +1,7 @@
+[connections.tyler-testing]
+account = "cjb04798"
+user = "tylerrichards"
+role = "ACCOUNTADMIN"
+database = "STREAMLIT"
+schema = "SIS_APPS"
+default_connection_name='tyler-testing-dev'
