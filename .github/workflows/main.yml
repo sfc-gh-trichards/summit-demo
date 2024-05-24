@@ -31,7 +31,7 @@ jobs:
       run: |
         mkdir -p ~/.snowflake
         cp tmp_config.toml ~/.snowflake/config.toml
-        echo password = \"$SNOWFLAKE_PASSWORD\" >> ~/.snowflake/config.toml
+        echo "password = \"$SNOWFLAKE_PASSWORD\"" >> ~/.snowflake.config.toml
         chmod 0600 ~/.snowflake/config.toml
         cat ~/.snowflake/config.toml
 
