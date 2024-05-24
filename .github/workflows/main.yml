@@ -1,0 +1,44 @@
+name: Deploy via snowcli
+
+on: [push]
+
+env:
+  PYTHON_VERSION: '3.8'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v3
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: 'Install snowcli'
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install snowflake-cli-labs
+
+    - name: 'Create snowsql config'
+      shell: bash
+      run: |
+        cd sis_metrics
+        cp config.tmpl config
+        echo "password =${{ secrets.SNOWCLI_PW }}" >> config
+
+    - name: 'Create the streamlit app'
+      shell: bash
+      run: |
+        cd sis_metrics
+        snow streamlit list --only-cols=name --no-show-header --no-show-border | grep -i unique_github_app && echo "exists, not creating" || snow streamlit create unique_github_app --file streamlit_app.py
+
+    - name: 'Deploy the streamlit app'
+      shell: bash
+      run: |
+        cd sis_metrics
+        snow streamlit deploy unique_github_app --file streamlit_app.py
