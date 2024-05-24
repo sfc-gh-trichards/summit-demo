@@ -28,17 +28,10 @@ jobs:
       shell: bash
       run: |
         cd sis_metrics
-        cp config.tmpl config
+        cp config.toml config
         echo "password =${{ secrets.SNOWCLI_PW }}" >> config
-
-    - name: 'Create the streamlit app'
-      shell: bash
-      run: |
-        cd sis_metrics
-        snow streamlit list --only-cols=name --no-show-header --no-show-border | grep -i unique_github_app && echo "exists, not creating" || snow streamlit create unique_github_app --file streamlit_app.py
 
     - name: 'Deploy the streamlit app'
       shell: bash
       run: |
-        cd sis_metrics
-        snow streamlit deploy unique_github_app --file streamlit_app.py
+        snow streamlit deploy
