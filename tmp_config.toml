@@ -1,3 +1,5 @@
+default_connection_name='tyler-testing'
+
 [connections.tyler-testing]
 account = "cjb04798"
 user = "tylerrichards"
