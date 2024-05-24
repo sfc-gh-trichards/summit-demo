@@ -33,6 +33,7 @@ jobs:
         cp tmp_config.toml ~/.snowflake/config.toml
         echo 'password = "$SNOWFLAKE_PASSWORD"' >> ~/.snowflake/config.toml
         chmod 0600 ~/.snowflake/config.toml
+        cat ~/.snowflake/config.toml
 
     - name: 'Deploy the streamlit app'
       shell: bash
