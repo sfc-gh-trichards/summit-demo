@@ -37,12 +37,8 @@ with col1:
     taba.line_chart(df.set_index('date'))
     tabb.write(df)
 
-#make views spent per day graph in the same way, but make the random numbers increase over time
 df['views'] = np.random.randint(100, 1000, 100)
-#multiply views by the log of index * a random number between 1 and 1.6
-
 df['views'] = df['views'] * np.log(df.index) * np.random.uniform(1, 1.6, 100)
-#make the first day have 0 views
 df['views'][0] = 0
 
 with col2:
@@ -51,22 +47,27 @@ with col2:
     tabc.line_chart(df.set_index('date')['views'])
     tabd.write(df)
 
+#beyond this point will be live coded
+
+#views per company
 df['views_per_company'] = df['views'] / df['customers']
 
 st.subheader("views per customer")
 st.line_chart(df.set_index('date')['views_per_company'])
-from snowflake.cortex import Complete
 
+
+from snowflake.cortex import Complete
 prompt = """
 Please summarize the following feedback comments
     in markdown from our streamlit in snowflake users, just give the top 3 good things and 3 improvement areas about the product: '
 """
-st.stop()
+df_feedback = session.sql('select * from streamlit.public.feedback_table').to_pandas()
+#add feedback to prompt
+prompt += "\n\n".join(df_feedback['FEEDBACK'])
+st.subheader("User Feedback")
 response = Complete(
     model='mistral-large',
-
-
-    sql_text="select * from streamlit.public.feedback_table"
+    prompt=prompt,
+    session=session
 )
-df_feedback = session.sql('select * from streamlit.public.feedback_table').to_pandas()
-st.write(df_feedback)
+st.write(response)
