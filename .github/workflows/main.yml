@@ -1,6 +1,9 @@
 name: Deploy via snowcli
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 env:
   PYTHON_VERSION: '3.8'
@@ -24,20 +27,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install snowflake-cli-labs
 
-    - name: 'Check SNOWFLAKE_PASSWORD'
-      shell: bash
-      env:
-          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWCLI_PW }}
-      run: |
-        echo ${{ secrets.SNOWCLI_PW }}
-        echo $SNOWCLI_PW
-        if [ -z "$SNOWFLAKE_PASSWORD" ]; then
-          echo "SNOWFLAKE_PASSWORD is not set or is empty"
-          exit 1
-        else
-          echo "SNOWFLAKE_PASSWORD is set and has a value"
-        fi
-
     - name: 'Create snowsql config'
       shell: bash
       env:
@@ -47,7 +36,6 @@ jobs:
         cp tmp_config.toml ~/.snowflake/config.toml
         echo "password = \"$SNOWFLAKE_PASSWORD\"" >> ~/.snowflake/config.toml
         chmod 0600 ~/.snowflake/config.toml
-        cat ~/.snowflake/config.toml
 
     - name: 'Deploy the streamlit app'
       shell: bash
