@@ -5,3 +5,5 @@ streamlit:
   query_warehouse: COMPUTE_WH
   main_file: streamlit_app.py
   env_file: environment.yml
+  additional_source_files:
+    - snowflake_logo.png

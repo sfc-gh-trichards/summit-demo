@@ -14,6 +14,7 @@ def is_local() -> bool:
     return st.experimental_user.email in {"test@localhost.com", "test@example.com"}
 
 st.title(f"Streamlit in Snowflake Key Metrics")
+st.sidebar.image("./snowflake_logo.png")
 
 if is_local():
     conn = st.connection('snowflake')
