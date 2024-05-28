@@ -1,6 +1,9 @@
 name: Deploy via snowcli
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 env:
   PYTHON_VERSION: '3.8'
