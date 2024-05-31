@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 from snowflake.snowpark.context import get_active_session
+from snowflake.cortex import Complete
 import pandas as pd
 st.set_page_config(layout="wide")
 
@@ -47,6 +48,26 @@ with col2:
     tabc.line_chart(df.set_index('date')['views'])
     tabd.write(df)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+st.stop()
 #beyond this point will be live coded
 
 #views per company
@@ -56,7 +77,7 @@ st.subheader("views per customer")
 st.line_chart(df.set_index('date')['views_per_company'])
 
 
-from snowflake.cortex import Complete
+
 prompt = """
 Please summarize the following feedback comments
     in markdown from our streamlit in snowflake users, just give the top 3 good things and 3 improvement areas about the product: '
