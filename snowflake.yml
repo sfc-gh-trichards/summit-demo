@@ -1,6 +1,6 @@
 definition_version: 1
 streamlit:
-  name: streamlit_app_create_feedback
+  name: streamlit_app
   stage: my_streamlit_stage
   query_warehouse: COMPUTE_WH
   main_file: streamlit_app.py
