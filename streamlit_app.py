@@ -69,6 +69,7 @@ with col2:
 
 
 
+
 df["views_per_customer"] = df["views"] / df["customers"]
 st.subheader("Views per customer")
 st.line_chart(df.set_index("date")["views_per_customer"])
